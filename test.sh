@@ -13,6 +13,20 @@ TEST_FILE_COUNTER=0
 declare -A FAIL_OUTPUT
 for i in $(find . -type f -name "test_*.sh");
 do
+	if [ "$TEST_FILE_FILTER" != "" ]; then 
+		IS_ACCEPT=0
+		for filter in $TEST_FILE_FILTER; do
+			if [[ "$i" =~ $filter ]]; then
+				IS_ACCEPT=1
+				break
+			fi
+		done
+
+		if [ "$IS_ACCEPT" -eq 0 ]; then
+			continue
+		fi
+	fi
+
 	TEST_FILE_COUNTER=$(( TEST_FILE_COUNTER + 1 ))
 
 	scrip_dir=$(dirname $i)
