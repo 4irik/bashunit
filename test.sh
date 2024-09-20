@@ -51,9 +51,9 @@ if [ ${#FAIL_OUTPUT[@]} -gt 0 ]; then
 	echo
 	echo "ERRORS:"
 	for i in "${!FAIL_OUTPUT[@]}"; do
-		echo -e "${i}:\n${FAIL_OUTPUT[$i]}"
+		echo -e "${i}:\n${FAIL_OUTPUT[$i]}" | sed -z 's/\n/\\n/g' 
 		echo
-	done
+	done | tac | sed 's/\\n/\n/g'
 fi
 
 echo "RESULT:"
