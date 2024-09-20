@@ -37,14 +37,16 @@ do
 	out=$(cd $scrip_dir && bash --noprofile --norc -c "source $CURR_DIR/utils.sh; source ./$script_file")
 	result=$?
 
+
 	if [ $result -ne 0 ]; then
 		FAIL_OUTPUT[$i]=$out
 		FAIL_COUNTER=$(( FAIL_COUNTER + 1 ))
-        echo -e "$i: ${COLOR_FAIL}FAIL${COLOR_NC}"
-    else
+        	echo -e "$i: ${COLOR_FAIL}FAIL${COLOR_NC}"
+	else
+
 		SUCCESS_COUNTER=$(( SUCCESS_COUNTER + 1 ))
-        echo -e "$i: ${COLOR_SUCCESS}success${COLOR_NC}"
-    fi
+        	echo -e "$i: ${COLOR_SUCCESS}success${COLOR_NC}"
+    	fi
 done
 
 if [ ${#FAIL_OUTPUT[@]} -gt 0 ]; then
@@ -60,3 +62,4 @@ echo "RESULT:"
 echo "total tests run: $TEST_FILE_COUNTER"
 echo "successfully: $SUCCESS_COUNTER"
 echo "failure: $FAIL_COUNTER"
+
