@@ -2,6 +2,8 @@
 
 TEST_FILE_FILTER=$@
 
+CURR_DIR=$(pwd)
+
 COLOR_FAIL='\033[0;31m' # Red
 COLOR_SUCCESS='\033[0;32m' # Green
 COLOR_NC='\033[0m' # No Color
@@ -32,7 +34,7 @@ do
 	scrip_dir=$(dirname $i)
 	script_file=$(basename $i)
 	# bash script.sh < input.txt > output.txt 2> error.log
-	out=$(cd $scrip_dir && bash ./$script_file)
+	out=$(cd $scrip_dir && bash --noprofile --norc -c "source $CURR_DIR/utils.sh; source ./$script_file")
 	result=$?
 
 	if [ $result -ne 0 ]; then
